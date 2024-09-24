@@ -40,7 +40,7 @@ Window* WindowCreate(int width, int height, const char* title)
 		SDL_WINDOWPOS_UNDEFINED,
 		SDL_WINDOWPOS_UNDEFINED,
 		width, height,
-	SDL_WINDOW_OPENGL);
+	    SDL_WINDOW_OPENGL);
 
 	window->context = SDL_GL_CreateContext(window->frame);
 
