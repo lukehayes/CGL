@@ -10,15 +10,12 @@ typedef struct Window
     SDL_Window* frame;
     SDL_GLContext* context;
 
-
 } Window;
 
 
 Window* WindowCreate(int width, int height, const char* title)
 {
-
     Window* window = malloc(sizeof(Window));
-
 
 	if (SDL_Init(SDL_INIT_VIDEO) > 0) {
 		fprintf(stderr, "ERROR: %s\n", SDL_GetError());
@@ -60,8 +57,8 @@ Window* WindowCreate(int width, int height, const char* title)
 
 void WindowDestory(Window* window)
 {
-	SDL_GL_DeleteContext(window->context);
-	SDL_DestroyWindow(window->frame);
+    SDL_GL_DeleteContext(window->context);
+    SDL_DestroyWindow(window->frame);
 
     free(window);
     window = NULL;
