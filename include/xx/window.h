@@ -45,12 +45,11 @@ Window* WindowCreate(int width, int height, const char* title)
 	window->context);
 
 	// Check OpenGL properties
-	printf("OpenGL loaded\n");
 	gladLoadGLLoader(SDL_GL_GetProcAddress);
 	printf("Vendor:   %s\n", glGetString(GL_VENDOR));
 	printf("Renderer: %s\n", glGetString(GL_RENDERER));
 	printf("Version:  %s\n", glGetString(GL_VERSION));
-    
+
     return window;
 }
 
