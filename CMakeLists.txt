@@ -6,7 +6,7 @@ project(XXGL)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(INCLUDE_DIRS "include")
-set(XX_DIR "${PROJECT_SOURCE_DIR}/src/XX")
+set(XX_DIR "${PROJECT_SOURCE_DIR}/src/xx")
 set(BIN_NAME "cgl")
 
 # -----------------------------------------------------------------------------
@@ -23,12 +23,11 @@ add_executable(${BIN_NAME} main.c src/glad.c)
 
 #add_subdirectory("src")
 
-# set(XX_LIB "XX")
-#
-# add_library(${XX_LIB} SHARED
-# 	"${XX_DIR}/Transform.cpp"
-# 	"${XX_DIR}/Entity.cpp"
-# )
+ set(XX_LIB "xx")
+
+ add_library(${XX_LIB} STATIC
+	 "${XX_DIR}/gl/debug_program.c"
+ )
 
 # -----------------------------------------------------------------------------
 # Build the System Library
@@ -56,4 +55,5 @@ add_executable(${BIN_NAME} main.c src/glad.c)
 # Link in the libraies the binary needs.
 # 
 target_link_libraries(${BIN_NAME} SDL2)
+target_link_libraries(${BIN_NAME} ${XX_LIB})
 
