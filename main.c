@@ -1,8 +1,13 @@
 #include "xx/window.h"
 
+#include "xx/gl/debug_program.h"
+
 int main(int argc, char *argv[])
 {
     Window* window = WindowCreate(800,600, "Title");
+
+    GLProgram prog = GLInitProgram();
+
 
     int RUNNING = 1;
     while(RUNNING)
@@ -11,22 +16,25 @@ int main(int argc, char *argv[])
         SDL_Event Event;
         while (SDL_PollEvent(&Event))
         {
-          if (Event.type == SDL_KEYDOWN)
-          {
-            switch (Event.key.keysym.sym)
+            if (Event.type == SDL_KEYDOWN)
             {
-              case SDLK_ESCAPE:
-                RUNNING = 0;
-                break;
-              default:
-                break;
-            }
+                switch (Event.key.keysym.sym)
+                {
+                    case SDLK_ESCAPE:
+                        RUNNING = 0;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
-
         glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-        glClearColor(0,0,0,1);
+
+        glUseProgram(prog.shader.program);
+
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
         SDL_GL_SwapWindow(window->frame);
     }
