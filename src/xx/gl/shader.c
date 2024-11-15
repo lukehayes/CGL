@@ -57,3 +57,32 @@ GLShader GLShaderInit()
 
     return shader;
 }
+
+void GLShaderUniform1F(GLShader* shader, const char* name, float v1)
+{
+    glUniform1f(
+        glGetUniformLocation(shader->program, name),
+        v1);
+}
+
+void GLShaderUniform2F(GLShader* shader, const char* name, float v1, float v2)
+{
+    glUniform2f(
+        glGetUniformLocation(shader->program, name),
+        v1,v2);
+}
+
+void GLShaderUniform3F(GLShader* shader, const char* name, float v1, float v2, float v3)
+{
+    glUniform3f(
+        glGetUniformLocation(shader->program, name),
+        v1,v2,v3);
+}
+
+void GLShaderUniform4F(GLShader* shader, const char* name, float v1, float v2, float v3, float v4)
+{
+    glUniform4f(
+        glGetUniformLocation(shader->program, name),
+        v1,v2,v3,v4);
+}
+
