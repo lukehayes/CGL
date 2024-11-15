@@ -1,13 +1,13 @@
 #include "xx/window.h"
-
 #include "xx/gl/debug_program.h"
+#include "xx/io.h"
 
 int main(int argc, char *argv[])
 {
     Window* window = WindowCreate(800,600, "Title");
 
     GLProgram prog = GLInitProgram();
-
+    GLShader shader = GLShaderInit();
 
     int RUNNING = 1;
     while(RUNNING)
@@ -31,10 +31,10 @@ int main(int argc, char *argv[])
 
         glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(prog.shader.program);
+        glUseProgram(shader.program);
 
         /*glDrawArrays(GL_TRIANGLES, 0, 3);*/
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINES, 6, GL_UNSIGNED_INT, 0);
 
 
         SDL_GL_SwapWindow(window->frame);

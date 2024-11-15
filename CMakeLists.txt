@@ -27,6 +27,7 @@ add_executable(${BIN_NAME} main.c src/glad.c)
 
  add_library(${XX_LIB} STATIC
 	 "${XX_DIR}/gl/debug_program.c"
+	 "${XX_DIR}/gl/shader.c"
  )
 
 # -----------------------------------------------------------------------------

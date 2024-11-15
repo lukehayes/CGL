@@ -2,19 +2,11 @@
 #define GL_DEBUG_PROG_H
 
 #include "glad/glad.h"
-#include "stdio.h"
+#include "xx/gl/shader.h"
 
 /**
 * This file is purely for testing a basic OpenGL setup.
 */
-
-typedef struct GLShader
-{
-    unsigned int vertex;
-    unsigned int fragment;
-    unsigned int program;
-
-} GLShader;
 
 typedef struct GLProgram
 {
@@ -25,9 +17,6 @@ typedef struct GLProgram
     GLShader shader;
 
 } GLProgram;
-
-
-GLShader GLInitShader();
 
 GLProgram GLInitProgram();
 
