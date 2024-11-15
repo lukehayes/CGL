@@ -54,6 +54,10 @@ add_executable(${BIN_NAME} main.c src/glad.c)
 # -----------------------------------------------------------------------------
 # Link in the libraies the binary needs.
 # 
+
+target_link_directories(${BIN_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/libs)
+
 target_link_libraries(${BIN_NAME} SDL2)
 target_link_libraries(${BIN_NAME} ${XX_LIB})
+target_link_libraries(${BIN_NAME} CIO)
 
