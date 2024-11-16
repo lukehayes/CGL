@@ -3,8 +3,6 @@
 
 typedef struct GLShader
 {
-    unsigned int vertex;
-    unsigned int fragment;
     unsigned int program;
 
 } GLShader;
