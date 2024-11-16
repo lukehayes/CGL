@@ -4,12 +4,13 @@
 #include <stdlib.h>
 #include "xx/io.h"
 
+
 GLShader GLShaderInit()
 {
     GLShader shader;
 
-    const char *vertexShaderSource = IOReadFile("../assets/shaders/VSH-Basic.glsl");
-    const char *fragmentShaderSource = IOReadFile("../assets/shaders/FSH-Basic.glsl");
+    const char *vertexShaderSource = IOReadFile("../assets/shaders/VSH-Camera3D.glsl");
+    const char *fragmentShaderSource = IOReadFile("../assets/shaders/FSH-Camera3D.glsl");
 
    // build and compile our shader program
     // ------------------------------------
@@ -86,3 +87,9 @@ void GLShaderUniform4F(GLShader* shader, const char* name, float v1, float v2, f
         v1,v2,v3,v4);
 }
 
+void GLShaderUniformMat4(GLShader* shader, const char* name, mat4 m)
+{
+    glUniformMatrix4fv(
+        (glGetUniformLocation(shader->program, name)), 
+        1, GL_FALSE, m[0]);
+}

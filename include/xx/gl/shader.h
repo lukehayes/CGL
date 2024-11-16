@@ -1,6 +1,8 @@
 #ifndef XX_SHADER_H
 #define XX_SHADER_H
 
+#include "cglm/cglm.h"
+
 typedef struct GLShader
 {
     unsigned int program;
@@ -43,5 +45,8 @@ void GLShaderUniform1F(GLShader* shader, const char* name, float v1);
 void GLShaderUniform2F(GLShader* shader, const char* name, float v1, float v2);
 void GLShaderUniform3F(GLShader* shader, const char* name, float v1, float v2, float v3);
 void GLShaderUniform4F(GLShader* shader, const char* name, float v1, float v2, float v3, float v4);
+void GLShaderUniformMat4(GLShader* shader, const char* name, mat4 m);
+
+
 
 #endif // XX_SHADER_H
