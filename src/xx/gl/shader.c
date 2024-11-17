@@ -9,8 +9,8 @@ GLShader GLShaderInit()
 {
     GLShader shader;
 
-    const char *vertexShaderSource = IOReadFile("../assets/shaders/VSH-Camera3D.glsl");
-    const char *fragmentShaderSource = IOReadFile("../assets/shaders/FSH-Camera3D.glsl");
+    const char *vertexShaderSource = IOReadFile("../assets/shaders/VSH-Texture.glsl");
+    const char *fragmentShaderSource = IOReadFile("../assets/shaders/FSH-Texture.glsl");
 
    // build and compile our shader program
     // ------------------------------------

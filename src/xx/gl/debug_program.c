@@ -10,10 +10,10 @@ GLProgram GLInitProgram()
     glGenBuffers(1, &program.vbo);
 
     float vertices[] = {
-	 0.5f,  0.5f, 0.0f,  // top right
-	 0.5f, -0.5f, 0.0f,  // bottom right
-	-0.5f, -0.5f, 0.0f,  // bottom left
-	-0.5f,  0.5f, 0.0f   // top left
+	 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,  // top right
+	 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,  // bottom right
+	-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,// bottom left
+	-0.5f,  0.5f, 0.0f, 0.0f, 1.0f // top left
     };
 
     glBindBuffer(GL_ARRAY_BUFFER, 1);
@@ -30,6 +30,9 @@ GLProgram GLInitProgram()
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     return program;
 }
