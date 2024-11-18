@@ -61,4 +61,4 @@ target_link_directories(${BIN_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/libs)
 target_link_libraries(${BIN_NAME} SDL2)
 target_link_libraries(${BIN_NAME} ${XX_LIB})
 target_link_libraries(${BIN_NAME} CIO)
-
+target_link_libraries(${BIN_NAME} m)
