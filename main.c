@@ -1,9 +1,7 @@
 #include "xx/window.h"
 #include "xx/gl/debug_program.h"
+#include "xx/gl/texture.h"
 #include "cglm/cglm.h"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb/stb_image.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,28 +15,7 @@ int main(int argc, char *argv[])
     mat4 viewMatrix       = GLM_MAT4_IDENTITY_INIT;
 
 
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    // set the texture wrapping/filtering options (on the currently bound texture object)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load and generate the texture
-    int width, height, nrChannels;
-    unsigned char *data = stbi_load("../assets/images/debug16.png", &width, &height, &nrChannels, 0);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        printf("Failed to load texture\n");
-    }
-    stbi_image_free(data);
-
+    Texture texture = TextureCreate("../assets/images/Astronort.png");
 
 
     static float c1 = 0.0;
@@ -73,7 +50,7 @@ int main(int argc, char *argv[])
         /*glm_rotated(modelMatrix, sin(c1) / 10.0, (vec3){1,1,1});*/
         /*glm_translate(modelMatrix, (vec3){sin(c1) / 100.0, cos(c1) / 100.0,0});*/
 
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glBindTexture(GL_TEXTURE_2D, texture.texture);
         glBindVertexArray(prog.vao);
 
         GLShaderUniformMat4(&shader, "model", modelMatrix);
