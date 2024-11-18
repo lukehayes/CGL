@@ -15,8 +15,7 @@ int main(int argc, char *argv[])
     mat4 viewMatrix       = GLM_MAT4_IDENTITY_INIT;
 
 
-    Texture texture = TextureCreate("../assets/images/Astronort.png");
-
+    Texture texture = TextureCreate("../assets/images/debug16.png");
 
     static float c1 = 0.0;
 

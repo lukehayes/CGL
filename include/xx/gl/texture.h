@@ -19,11 +19,15 @@ typedef struct Texture
 
 void _TextureLoad(Texture* texture, const char* image)
 {
+    stbi_set_flip_vertically_on_load(1);
     unsigned char *data = stbi_load(image, &texture->width, &texture->height, &texture->nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
+
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        glEnableVertexAttribArray(1);
     }
     else
     {
@@ -37,8 +41,8 @@ void _TextureSetFilter()
     // Set the texture wrapping/filtering options (on the currently bound texture object)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 }
 
@@ -48,7 +52,7 @@ Texture TextureCreate(const char* image)
     glGenTextures(1, &texture.texture);
     glBindTexture(GL_TEXTURE_2D, texture.texture);
 
-    //_TextureSetFilter();
+    _TextureSetFilter();
 
     _TextureLoad(&texture, image);
 
