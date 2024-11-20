@@ -3,6 +3,7 @@
 
 #include "glad/glad.h"
 #include "xx/gl/shader.h"
+#include "xx/gl/texture.h"
 
 /**
 * This file is purely for testing a basic OpenGL setup.
@@ -15,6 +16,7 @@ typedef struct GLProgram
     GLuint ebo;
 
     GLShader shader;
+    Texture* texture;
 
 } GLProgram;
 

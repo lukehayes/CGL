@@ -1,13 +1,6 @@
 #ifndef GL_TEXUTRE_H
 #define GL_TEXUTRE_H
 
-#include "stddef.h"
-#include "glad/glad.h"
-
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb/stb_image.h"
-
-
 typedef struct Texture 
 {
     int width;
@@ -17,50 +10,9 @@ typedef struct Texture
 
 } Texture;
 
-void _TextureLoad(Texture* texture, const char* image)
-{
-    stbi_set_flip_vertically_on_load(1);
-    unsigned char *data = stbi_load(image, &texture->width, &texture->height, &texture->nrChannels, 0);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texture->width, texture->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
 
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-        glEnableVertexAttribArray(2);
-    }
-    else
-    {
-        printf("Failed to load texture:%s\n", image);
-    }
-    stbi_image_free(data);
-}
+Texture* TextureCreate(const char* image);
 
-void _TextureSetFilter()
-{
-    // Set the texture wrapping/filtering options (on the currently bound texture object)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+void TextureDestroy(Texture* texture);
 
-}
-
-Texture TextureCreate(const char* image)
-{
-    Texture texture;
-    glGenTextures(1, &texture.texture);
-    glBindTexture(GL_TEXTURE_2D, texture.texture);
-
-    _TextureSetFilter();
-
-    _TextureLoad(&texture, image);
-
-    return texture;
-}
-
-void TextureDestroy(Texture* texture)
-{
-    glDeleteTextures(1, &texture->texture);
-}
 #endif // GL_TEXUTRE_H
