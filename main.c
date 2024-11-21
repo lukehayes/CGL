@@ -19,7 +19,7 @@ void Draw(GLProgram* program, Entity* entity, Camera3D* camera)
     glUseProgram(program->shader.program);
 
     // glm_rotated(modelMatrix, sin(c1) / 10.0, (vec3){1,1,1});
-     glm_translate(modelMatrix, entity->position);
+    glm_translate(modelMatrix, entity->position);
 
     glBindTexture(GL_TEXTURE_2D, program->texture->texture);
     glBindVertexArray(program->vao);
@@ -39,10 +39,10 @@ int main(int argc, char *argv[])
 {
     Window* window = WindowCreate(800,600, "Title");
 
-    GLProgram prog   = GLInitProgram();
+    GLProgram prog   = GLInitProgram("../assets/images/debug16.png");
     GLShader shader  = GLShaderInit();
     Camera3D camera  = Camera3DCreate((vec3){0.0f,0.0f,5.0f});
-    GLProgram prog2  = GLInitProgram();
+    GLProgram prog2   = GLInitProgram("../assets/images/debug32.png");
 
 
     prog.shader      = shader;
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     {
         for(int y = 0; y<= MAX - 1; y++)
         {
-            Entity e = {.position = {3 * x,3 * y,-3}, .color = {1,x / 2.0,y / 2.0}};
+            Entity e = {.position = {2 * x,2 * y,-2}, .color = {1,x / 2.0,y / 2.0}};
             entities[x][y] = e;
         }
     }
@@ -88,17 +88,15 @@ int main(int argc, char *argv[])
 
         c1 += 0.01;
 
-
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
         camera.position[0] = sin(c1) * 10.0;
         camera.position[1] = cos(c1) * 10.0;
-        camera.position[2] = cos(c1) * 100.0;
+        camera.position[2] = cos(c1) * 10.0;
 
-        e2.position[0] = sin(c1) * 3.0;
-        e2.position[1] = cos(c1) * 3.0;
-        e2.position[2] = -cos(c1) * 10.0;
+        e2.position[0]     = sin(c1) * 3.0;
+        e2.position[1]     = cos(c1) * 3.0;
+        /*e2.position[2]     = -cos(c1) * 10.0;*/
 
         for(int x = 0; x<= MAX - 1; x++)
         {

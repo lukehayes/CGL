@@ -20,6 +20,6 @@ typedef struct GLProgram
 
 } GLProgram;
 
-GLProgram GLInitProgram();
+GLProgram GLInitProgram(const char* imagePath);
 
 #endif // !GL_DEBUG_PROG_H

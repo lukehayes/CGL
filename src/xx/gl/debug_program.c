@@ -1,6 +1,6 @@
 #include "xx/gl/debug_program.h"
 
-GLProgram GLInitProgram()
+GLProgram GLInitProgram(const char* imagePath)
 {
     GLProgram program;
 
@@ -35,7 +35,7 @@ GLProgram GLInitProgram()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-	program.texture = TextureCreate("../assets/images/debug16.png");
+    program.texture = TextureCreate(imagePath);
 
     return program;
 }
