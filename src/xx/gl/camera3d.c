@@ -42,6 +42,6 @@ void Camera3DUpdate(Camera3D* camera, GLShader* shader)
         camera->viewMatrix
     );
 
-    GLShaderUniformMat4(shader, "view", camera->viewMatrix);
-    GLShaderUniformMat4(shader, "projection", camera->projectionMatrix);
+    GLShaderUniformMat4(shader, "uView", camera->viewMatrix);
+    GLShaderUniformMat4(shader, "uProjection", camera->projectionMatrix);
 }

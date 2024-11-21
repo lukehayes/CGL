@@ -26,7 +26,7 @@ void Draw(GLProgram* program, Entity* entity, Camera3D* camera)
 
 
     Camera3DUpdate(camera, &program->shader);
-    GLShaderUniformMat4(&program->shader, "model", modelMatrix);
+    GLShaderUniformMat4(&program->shader, "uModel", modelMatrix);
     GLShaderUniform3F(&program->shader, "uColor", 
                                         entity->color[0],
                                         entity->color[1],
@@ -39,20 +39,20 @@ int main(int argc, char *argv[])
 {
     Window* window = WindowCreate(800,600, "Title");
 
-    GLProgram prog  = GLInitProgram();
-    GLShader shader = GLShaderInit();
-    Camera3D camera = Camera3DCreate((vec3){0.0f,0.0f,5.0f});
+    GLProgram prog   = GLInitProgram();
+    GLShader shader  = GLShaderInit();
+    Camera3D camera  = Camera3DCreate((vec3){0.0f,0.0f,5.0f});
     GLProgram prog2  = GLInitProgram();
 
 
-    prog.shader = shader;
-    prog2.shader = shader;
+    prog.shader      = shader;
+    prog2.shader     = shader;
     Texture* texture = TextureCreate("../assets/images/debug16.png");
 
     Entity e1 = {.position = {0,0,-10}, .color = {1,0,0}};
     Entity e2 = {.position = {4,2,-10}, .color = {1,1,0}};
 
-    const int MAX = 10;
+    const int MAX = 3;
     Entity entities[MAX][MAX];
 
     for(int x = 0; x<= MAX - 1; x++)
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
 
         camera.position[0] = sin(c1) * 10.0;
         camera.position[1] = cos(c1) * 10.0;
-        camera.position[2] = -cos(c1) * 100.0;
+        camera.position[2] = cos(c1) * 100.0;
 
         e2.position[0] = sin(c1) * 3.0;
         e2.position[1] = cos(c1) * 3.0;
