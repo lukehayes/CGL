@@ -23,12 +23,10 @@ void Draw(GLProgram* program, Entity* entity, Camera3D* camera)
 
     // glm_rotated(modelMatrix, sin(c1) / 10.0, (vec3){1,1,1});
     glm_translate(modelMatrix, entity->position);
-
-    glm_scale(modelMatrix, entity->scale);
+    /*glm_scale(modelMatrix, entity->scale);*/
 
     glBindTexture(GL_TEXTURE_2D, program->texture->texture);
     glBindVertexArray(program->vao);
-
 
     Camera3DUpdate(camera, &program->shader);
     GLShaderUniformMat4(&program->shader, "uModel", modelMatrix);
@@ -56,16 +54,14 @@ int main(int argc, char *argv[])
     Entity e1 = {.position = {0,0,-10}, .color = {1,0,0}};
     Entity e2 = {.position = {4,2,-10}, .color = {1,1,0}};
 
-    const int MAX = 10;
-    Entity entities[MAX][MAX];
+    const int MAX = 100;
+    Entity entities[MAX];
 
     for(int x = 0; x<= MAX - 1; x++)
     {
-        for(int y = 0; y<= MAX - 1; y++)
-        {
-            int px = RandRangeI(-30,30);
-            int py = RandRangeI(-30,30);
-            int pz = RandRangeI(-30,30);
+            int px = RandRangeI(-10,10);
+            int py = RandRangeI(-10,10);
+            int pz = RandRangeI(-10,10);
 
             int cx = RandRangeI(0,1);
             int cy = RandRangeI(0,1);
@@ -85,8 +81,7 @@ int main(int argc, char *argv[])
                 .scale = {sx,sy,sz},
                 .color = {cx,cy,cz}
             };
-            entities[x][y] = e;
-        }
+            entities[x] = e;
     }
 
     static float c1 = 0.0;
@@ -125,12 +120,8 @@ int main(int argc, char *argv[])
 
         for(int x = 0; x<= MAX - 1; x++)
         {
-            for(int y = 0; y<= MAX - 1; y++)
-            {
-                Entity e = entities[x][y];
-                Draw(&prog, &entities[x][y], &camera);
-            }
-
+                Entity e = entities[x];
+                Draw(&prog, &entities[x], &camera);
         }
 
         Draw(&prog, &e1, &camera);
